@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import './MovieList.css';
 
 class MovieList extends Component {
     componentDidMount(){
@@ -11,7 +12,7 @@ class MovieList extends Component {
     render() {
         return (
             <div className='MovieList'>
-                <h1>{JSON.stringify(this.props.reduxState.movies)}</h1>
+                <h1>{this.props.reduxState.movies.map(movie => <div className="movieResult" key={movie.id}><img src={movie.poster} className="moviePoster"/></div>)}</h1>
             </div>
         )
     }

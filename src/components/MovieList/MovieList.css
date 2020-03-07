@@ -1,0 +1,11 @@
+.movieResult {
+    display: flex;
+    flex-wrap: wrap;
+}
+.moviePoster{
+    height: auto;
+    width: 75%;
+}
+.movieResult {
+    width: 15%;
+}
