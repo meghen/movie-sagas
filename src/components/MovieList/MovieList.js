@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './MovieList.css';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import { Typography } from '@material-ui/core';
 
 class MovieList extends Component {
     componentDidMount(){
@@ -12,7 +17,18 @@ class MovieList extends Component {
     render() {
         return (
             <div className='MovieList'>
-                <h1>{this.props.reduxState.movies.map(movie => <div className="movieResult" key={movie.id}><img src={movie.poster} className="moviePoster"/></div>)}</h1>
+                {this.props.reduxState.movies.map(movie => 
+                    <Card className="movieResult" key={movie.id}>
+                            <CardMedia 
+                                style={{height: 300}}
+                                image={movie.poster}
+                                className="moviePoster"
+                                title= {movie.title}
+                            />
+                        <CardContent>
+                            <Typography>{movie.title}</Typography>
+                        </CardContent>
+                    </Card>)}
             </div>
         )
     }
