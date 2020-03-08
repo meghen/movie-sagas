@@ -9,21 +9,45 @@ import Button from '@material-ui/core/Button';
 import './MovieDetails.css';
 class MovieDetails extends Component {
     state = {
-        moviesDisplaying: true
+        moviesDisplaying: true,
+        dataToSend: {
+            id: 0,
+            title: '',
+            description: ''
+        }
     }
-    seeAllMovies=()=>{
-        this.props.history.push(`/#`)
+    componentDidMount(){
+        this.getAllInfo();
     }
     editPage=()=>{
         this.setState({
+            ...this.state,
             moviesDisplaying: false
+        })
+    }
+    getAllInfo=()=>{
+        this.props.dispatch({type: 'GET_GENRES'})
+    }
+    handleChange=(event, typeOf)=>{
+        this.setState({
+            ...this.state,
+            dataToSend: {
+                ...this.state.dataToSend,
+                [typeOf]: event.target.value
+            }
         })
     }
     saveEdits=(id)=>{
         //dispatch to generator function
-        this.setState({ moviesDisplaying: true})   
-        // this.props.dispatch({type:'PUT_MOVIES', payload: id}) 
-    
+        this.setState({ 
+            ...this.state,
+            moviesDisplaying: true
+        })   
+        console.log('after typing we have:', this.state);
+        this.props.dispatch({type:'PUT_MOVIES', payload: this.state.dataToSend}) 
+    }
+    seeAllMovies=()=>{
+        this.props.history.push(`/#`)
     }
     render() {
         // this.props.history.location.pathname gets the url after button click
@@ -33,6 +57,7 @@ class MovieDetails extends Component {
             <div className='MovieDetails'> 
                 {this.state.moviesDisplaying ? (
                     this.props.reduxState.movies.map(movie => 
+                        // eslint-disable-next-line
                         (movieId.charAt(movieId.length-1) == movie.id)? 
                             <Card className="movieResult" key={movie.id}>
                                 {/* <CardMedia 
@@ -55,9 +80,9 @@ class MovieDetails extends Component {
                     ) : (
                         <Card>
                             <CardContent>
-                                <input className="editTitle" placeholder="Edit Movie Title"></input>
+                                <input className="editTitle" placeholder="Edit Movie Title" onChange={(event)=>this.handleChange(event, 'title')}></input>
                                 <br></br>
-                                <textarea className="editDesc" placeholder="Edit Movie Description"></textarea>
+                                <textarea className="editDesc" placeholder="Edit Movie Description" onChange={(event)=>this.handleChange(event, 'description')}></textarea>
                                 <br></br>
                             </CardContent>
                             <CardActions>
