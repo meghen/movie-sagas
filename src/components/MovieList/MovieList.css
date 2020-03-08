@@ -1,7 +1,3 @@
-/* .moviePoster{
-    height: 190px;
-    width: 100%;
-} */
 .MovieList {
     display: grid;
     /* flex-direction: ; */
@@ -10,7 +6,6 @@
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     margin: 1%;
-
 }
 .movieResult {
     /* flex-wrap: wrap;
