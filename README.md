@@ -7,8 +7,6 @@ _Duration: 1 Weekend Sprint_
 The goal of this app is to show movies stored in the database. There are two different views - the all movies page and the movie details page. The all movies page only shows movie title and a poster, where as when the user clicks into a given movie, they will be able to not only read the description, but also make changes to the title or description.
 
 
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
-
 ### Built With
 
 - [Node.js](https://nodejs.org/en/)
