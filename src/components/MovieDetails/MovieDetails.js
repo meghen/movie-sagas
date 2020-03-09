@@ -29,7 +29,7 @@ class MovieDetails extends Component {
     editPage=()=>{
         this.setState({
             ...this.state,
-            moviesDisplaying: false
+            moviesDisplaying: !this.state.moviesDisplaying
         })
     }
     getAllInfo=(movieId)=>{
@@ -79,8 +79,8 @@ class MovieDetails extends Component {
                                 <CardActions>
                                     <Button size="small" variant="outlined" color="primary" onClick={this.seeAllMovies}>Back To All Movies</Button>
                                     <Button size="small" variant="outlined" color="secondary" onClick={()=>this.editPage(movie.id)}>Edit</Button>
-                                    {this.props.reduxState.genres.map(genres => <div className="tag">{genres.name}</div>)}
                                 </CardActions>
+                                    {this.props.reduxState.genres.map(genres => <div className="tag">{genres.name}</div>)}
                              </Card>
                              //empty JSX tags to fill in for "else" in ternary operator
                             : <></>)
@@ -94,6 +94,7 @@ class MovieDetails extends Component {
                             </CardContent>
                             <CardActions>
                                 <Button size="small" variant="outlined" color="primary" onClick={this.saveEdits}>Save</Button>
+                                <Button size="small" variant="outlined" color="secondary" onClick={this.editPage}>Cancel</Button>
                             </CardActions>
                         </Card>
                     )}
