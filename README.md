@@ -4,24 +4,19 @@
 
 _Duration: 1 Weekend Sprint_
 
-Directly above this is how long it took you to develop the project. Your project description goes here. What problem did you solve? How did you solve it? 
+The goal of this app is to show movies stored in the database. There are two different views - the all movies page and the movie details page. The all movies page only shows movie title and a poster, where as when the user clicks into a given movie, they will be able to not only read the description, but also make changes to the title or description.
 
 
 To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
-
-## Screen Shot
-
-Include one or two screen shots of your project here (optional). Remove if unused.
 
 ### Built With
 
 - [Node.js](https://nodejs.org/en/)
 - React
 - PostgreSQL
+- MaterialUI
 
-## Installation
-If your application has secret keys (for example --  Twilio), make sure you tell them how to set that up, both in getting the key and then what to call it in the `.env` file.
-
+### Installation
 ## Database Setup
 
 1. Create a database named `saga_movies_weekend`
@@ -33,16 +28,6 @@ If your application has secret keys (for example --  Twilio), make sure you tell
 1. `npm install`
 2. `npm run server`
 3. `npm run client`
-
-## Usage
-How does someone use this application? Tell a user story here.
-
-1. xxx
-2. xxx
-3. xxx
-4. xxx
-5. xxx
-6. xxx
 
 
 ## Acknowledgement

@@ -47,7 +47,7 @@ Genres can be applied to many different movies. Movies can have multiple genres.
 The details page should have the buttons:
 
 <!-- - `Back to List` button, which should bring the user to the Home Page -->
-- `Edit` button, which should bring the user to the Edit Page
+<!-- - `Edit` button, which should bring the user to the Edit Page -->
 
 > Base functionality does not require the movie details to load correctly after refresh of the browser.
 
