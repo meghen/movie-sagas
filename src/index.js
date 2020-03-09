@@ -22,8 +22,9 @@ function* getMovies() {
     const response = yield Axios.get('/movies');
     yield put({type: 'SET_MOVIES', payload: response.data});
 }
-function* updateMovie(action) {
-    yield Axios.get(`/movies/${action.payload}`, action.payload);    
+function* updateMovie(action) {    
+    yield Axios.put(`/movies/${action.payload.id}`, action.payload);   
+    yield put({type: 'GET_GENRES'}) 
 }
 function* getGenres(action){
    const response = yield Axios.get(`/movies/genres/${action.payload}`);

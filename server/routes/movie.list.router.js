@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
 });
 //movies_genre GET to db
 router.get('/genres/:id', (req, res) => {
-    console.log('in / GET', req.params.id);
     //Query commands
     let queryString = `SELECT * FROM "movies_genres"
     JOIN "genres" ON "genres"."id" = "movies_genres"."genre_id"
@@ -26,7 +25,6 @@ router.get('/genres/:id', (req, res) => {
     //run a query in pool    
     pool.query(queryString, [req.params.id]).then((results) => {
     // if successful, we'll respond with the rows from the results
-        console.log('query results', results.rows);
         res.send(results.rows);
     }).catch((err) => {
         console.log(err);
@@ -36,7 +34,9 @@ router.get('/genres/:id', (req, res) => {
 //PUT query to DB
 router.put('/:id', (req, res) => {
     //Query commands
-    let queryString = `UPDATE "movies" SET "title"='$1', "description"='$2' WHERE "id"=$3;`;
+    console.log('PUT ROUTER: ', req.body, req.params.id);
+    
+    let queryString = `UPDATE "movies" SET "title"=$1, "description"=$2 WHERE "id"=$3;`;
     //run a query in pool
     pool.query(queryString, [req.body.title, req.body.description, req.params.id]).then((results) => {
     // if successful, we'll respond with OK
@@ -44,7 +44,7 @@ router.put('/:id', (req, res) => {
     }).catch((err) => {
         console.log(err);
         res.sendStatus(500);
-})
+    })
 });
 
 
