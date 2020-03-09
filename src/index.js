@@ -25,8 +25,8 @@ function* getMovies() {
 function* updateMovie(action) {
     yield Axios.get(`/movies/${action.payload}`, action.payload);    
 }
-function* getGenres(){
-    const response = yield Axios.get('/movies/genres');
+function* getGenres(action){
+    const response = yield Axios.get('/movies/genres/'+ action.payload);
     yield put({type: 'SET_GENRES', payload: response.data})
 }
 // Create sagaMiddleware

@@ -26,7 +26,7 @@ class MovieDetails extends Component {
         })
     }
     getAllInfo=()=>{
-        this.props.dispatch({type: 'GET_GENRES'})
+        this.props.dispatch({type: 'GET_GENRES', payload: this.state.dataToSend.id})
     }
     handleChange=(event, typeOf)=>{
         this.setState({
@@ -52,13 +52,14 @@ class MovieDetails extends Component {
     render() {
         // this.props.history.location.pathname gets the url after button click
         // .charAt allows us to target the last character in the url, which happens to be our movie id
-        const movieId = this.props.history.location.pathname
+        const pathnameParts = this.props.history.location.pathname.split('details/')
+        const movieId = pathnameParts[1]
         return (
             <div className='MovieDetails'> 
                 {this.state.moviesDisplaying ? (
                     this.props.reduxState.movies.map(movie => 
                         // eslint-disable-next-line
-                        (movieId.charAt(movieId.length-1) == movie.id)? 
+                        (movieId == movie.id)? 
                             <Card className="movieResult" key={movie.id}>
                                 {/* <CardMedia 
                                     style={{height: 100}}
@@ -73,6 +74,7 @@ class MovieDetails extends Component {
                                 <CardActions>
                                     <Button size="small" variant="outlined" color="primary" onClick={this.seeAllMovies}>Back To All Movies</Button>
                                     <Button size="small" variant="outlined" color="secondary" onClick={()=>this.editPage(movie.id)}>Edit</Button>
+                                    {this.props.reduxState.genres.map(genres => <div className="tag">{genres.name}</div>)}
                                 </CardActions>
                              </Card>
                              //empty JSX tags to fill in for "else" in ternary operator

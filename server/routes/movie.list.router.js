@@ -18,14 +18,18 @@ router.get('/', (req, res) => {
     })
 });
 //movies_genre GET to db
-router.get('/genres', (req, res) => {
+router.get('/genres/:id', (req, res) => {
     console.log('in / GET');
     //Query commands
-    let queryString = `SELECT * FROM "movies_genres"
-    JOIN "genres" ON "genres"."id" = "movies_genres"."genre_id"
-    JOIN "movies" ON "movies"."id" = "movies_genres"."movie_id";`;
+    let queryString = `SELECT "genres"."name"
+    FROM "genres"
+    JOIN "movie_genres"
+        ON "movie_genres"."genre_id" = "genres"."id"
+    JOIN "movies"
+        ON "movie_genres"."movie_id" = "movies"."id"
+    WHERE "movies"."id" = $1;`;
     //run a query in pool    
-    pool.query(queryString).then((results) => {
+    pool.query(queryString, req.params.id).then((results) => {
     // if successful, we'll respond with the rows from the results
         console.log('query results', results.rows);
         res.send(results.rows);
