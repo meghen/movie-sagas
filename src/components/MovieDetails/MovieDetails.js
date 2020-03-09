@@ -17,7 +17,14 @@ class MovieDetails extends Component {
         }
     }
     componentDidMount(){
-        this.getAllInfo();
+        const pathnameParts = this.props.history.location.pathname.split('details/')
+        const movieId = pathnameParts[1]
+        this.setState({
+            dataToSend: {
+                id: movieId
+                }
+        })
+        this.getAllInfo(movieId);
     }
     editPage=()=>{
         this.setState({
@@ -25,8 +32,8 @@ class MovieDetails extends Component {
             moviesDisplaying: false
         })
     }
-    getAllInfo=()=>{
-        this.props.dispatch({type: 'GET_GENRES', payload: this.state.dataToSend.id})
+    getAllInfo=(movieId)=>{
+        this.props.dispatch({type: 'GET_GENRES', payload: movieId})
     }
     handleChange=(event, typeOf)=>{
         this.setState({
@@ -52,14 +59,12 @@ class MovieDetails extends Component {
     render() {
         // this.props.history.location.pathname gets the url after button click
         // .charAt allows us to target the last character in the url, which happens to be our movie id
-        const pathnameParts = this.props.history.location.pathname.split('details/')
-        const movieId = pathnameParts[1]
         return (
             <div className='MovieDetails'> 
                 {this.state.moviesDisplaying ? (
                     this.props.reduxState.movies.map(movie => 
                         // eslint-disable-next-line
-                        (movieId == movie.id)? 
+                        (this.state.dataToSend.id == movie.id)? 
                             <Card className="movieResult" key={movie.id}>
                                 {/* <CardMedia 
                                     style={{height: 100}}
